@@ -1,6 +1,6 @@
-#include "Board.hpp"
-#include "Player.hpp"
-#include "Game.hpp"
+#include "../include/Board/Board.hpp"
+#include "../include/Player/Player.hpp"
+#include "../include/Game/Game.hpp"
 
 int main(){
 
@@ -37,6 +37,17 @@ int main(){
 	}
 
 	// Fim entrada.
+
+	std::cout << "-----" << std::endl;
+	std::cout << "Printing ListAdj" << std::endl;
+	game->createListAdj();
+	game->printListAdj();
+	std::cout << "-----" << std::endl;
+
+	std::cout << "-----" << std::endl;
+	std::cout << "Printing BFS" << std::endl;
+	game->bfs();
+	std::cout << "-----" << std::endl;
 
 	std::cout << "-----" << std::endl;
 	std::cout << "Printing Board" << std::endl;

@@ -7,8 +7,8 @@
 class Player{
 private:
 	int id;
-	bool iWinner = false;
-	bool iStuck = false;
+	bool isWinner = false;
+	bool isStuck = false;
 	std::pair<int, int> position;
 	int lastMoviment = 0;
 
@@ -21,7 +21,7 @@ public:
 
 	void setIsWinner(bool isWinner);
 	bool getIsWinner() const;
-  
+
 	void setX(int x);
 	int getX() const;
 
@@ -35,6 +35,7 @@ public:
 	int getLastMoviment() const;
 
 	void printPlayer() const;
+	void movePlayer(int x, int y);
 };
 
 #endif

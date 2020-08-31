@@ -2,20 +2,17 @@
 #define BOARD_H
 
 
-#include "Player.hpp"
+#include "../Player/Player.hpp"
 
 #include <iostream>
 #include <vector>
 #include <memory>
 
-template <typename T>
-using Matrix = std::vector<std::vector<T>>;
-
 class Board{
 private:
 	int x;
 	int y;
-	Matrix<int> board;
+	std::vector<std::vector<int>> board;
 
 public:
 	Board(int x, int y);
@@ -30,7 +27,7 @@ public:
 	void setPositionValue(int x, int y, int value);
 	int getPositionValue(int x, int y) const;
 
-  Matrix<int> getBoard() const;
+  std::vector<std::vector<int>> getBoard() const;
 	void printBoard() const;
 };
 
