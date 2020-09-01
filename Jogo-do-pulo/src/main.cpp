@@ -2,6 +2,8 @@
 #include "../include/Player/Player.hpp"
 #include "../include/Game/Game.hpp"
 
+#include <chrono>
+
 int main(){
 
 	// Início entrada
@@ -12,6 +14,8 @@ int main(){
 	int boardValues;
 	int xPlayer;
 	int yPlayer;
+
+	auto start = std::chrono::steady_clock::now();
 
 	std::cin >> xBoard;
 	std::cin >> yBoard;
@@ -40,6 +44,11 @@ int main(){
 
 	game->createListAdj();
 	game->defineWinner(game->bfs());
+
+
+	auto end = std::chrono::steady_clock::now();
+	auto diff = end - start;
+	std::cout << std::chrono::duration <double, std::milli>(diff).count() << std::endl;
 
 	return 0;
 }
