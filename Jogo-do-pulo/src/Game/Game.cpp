@@ -55,18 +55,26 @@ void Game::createListAdj(){
         pos.first = x-positionValue;
         this->list.at(k).push_back(pos);
       }
+      pos.first = x;
+      pos.second = y;
       if(x+positionValue<this->board->getX()){
         pos.first = x+positionValue;
         this->list.at(k).push_back(pos);
       }
+      pos.first = x;
+      pos.second = y;
       if(y-positionValue>=0){
         pos.second = y-positionValue;
         this->list.at(k).push_back(pos);
       }
+      pos.first = x;
+      pos.second = y;
       if(y+positionValue<this->board->getY()){
         pos.second = y+positionValue;
         this->list.at(k).push_back(pos);
       }
+      pos.first = x;
+      pos.second = y;
 
       k = k+1;
 	  }
@@ -86,7 +94,7 @@ void Game::printListAdj(){
 void Game::bfs(){
   std::queue<std::pair<int, int>> q;
   std::pair<int, int> finalPostion;
-  std::map<std::pair<int, int>, bool> visited;
+  std::map<std::pair<int, int>, std::pair<int, bool>> visited;
   std::map<int, int> possiblesWin;
 
   finalPostion.first = this->board->getX()-1;
@@ -96,51 +104,75 @@ void Game::bfs(){
 
   for(auto p = this->players.begin(); p!=this->players.end(); p++){
     q.push(std::pair<int, int>((*p)->getX(), (*p)->getY()));
-    count = 0;
     visited.clear();
-
-    std::cout << "----------------" << (*p)->getId() << std::endl;
-    std::cout << "To no player: " << (*p)->getId() << std::endl;
-
+    std::pair<int, int> v = q.front();
+    visited.insert({v,std::pair<int, bool>(0, true)});
     while(!q.empty()){
-      count = count + 1;
       std::pair<int, int> v = q.front();
       int vPosition = (this->board->getY())*v.first + (1+v.second) -1;
       q.pop();
-      visited.insert({v, true});
-      if(v == finalPostion){
-        possiblesWin.insert({(*p)->getId(), count});
-        while(!q.empty()){
-          q.pop();
-        }
-        std::cout << "Já cheguei no final, agr saio" << std::endl;
-        break;
-      }
-
-      std::cout << "To visitando esse: " << v.first << ", " << v.second << "> ";
-
+      (*p)->setLastMoviment(this->board->getPositionValue(v.first, v.second));
+      
       for(auto col=this->list.at(vPosition).begin(); col != this->list.at(vPosition).end(); col++){
+        visited.insert({(*col),std::pair<int, bool>(visited.find(v)->second.first+1 , false)});
+        if(!visited.find(*col)->second.second){
 
-        std::cout << "Esse apareceu: " << col->first << col->second << std::endl;
-
-        visited.insert({v, false});
-        if(!visited.find(*col)->second){
-          std::cout << "Esse foi pra fila: " << col->first << col->second << std::endl;
+          if((*col) == finalPostion){
+            count = visited.find((*col))->second.first;
+            possiblesWin.insert({(*p)->getId(), count});
+            while(!q.empty()){
+              q.pop();
+            }
+            break;
+          }
+          visited.find(*col)->second.second = true;
           q.push((*col));
         }
       }
     }
   }
 
-  count = 0;
-  int winner;
-  for(auto itr = possiblesWin.begin(); itr != possiblesWin.end(); itr++){ 
-    if((*itr).second>count){
-      count = (*itr).second;
-      winner = (*itr).first;
-    }
-  } 
-
-  std::cout << std::endl << "Ganhador: " << winner << std::endl << "Rodadas: " << count;
+  if(!possiblesWin.empty()){
+    count = possiblesWin.begin()->second;
+    int winner = possiblesWin.begin()->first;
+    for(auto itr = possiblesWin.begin(); itr != possiblesWin.end(); itr++){
+      if((*itr).second<count){
+        count = (*itr).second;
+        winner = (*itr).first;
+      }else if((*itr).second==count && (*itr).first!=winner){
+        int last1;
+        int id1;
+        int first1;
+        int id2;
+        int last2;
+        int first2;
+        for(auto p = this->players.begin(); p!=this->players.end(); p++){
+          if((*p)->getId() == (*itr).first){
+            last1 = (*p)->getLastMoviment();
+            id1 = (*p)->getId();
+            first1 = (*p)->getFirstMoviment();
+          }else if((*p)->getId() == winner){
+            last2 = (*p)->getLastMoviment();
+            id2 = (*p)->getId();
+            first2 = (*p)->getFirstMoviment();
+          }
+          if(last1>last2){
+            winner = id2;
+          }else if(last1<last2){
+            winner = id1;
+          }else{
+            if(first1>=first2){
+              winner = id2;
+            }else{
+              winner = id1;
+            }
+          }
+        }
+      }
+    } 
+    std::cout << std::endl << winner << std::endl << count;
+  }else{
+    std::cout << std::endl << "SEM VENCEDORES" << std::endl;
+  }
 
 }

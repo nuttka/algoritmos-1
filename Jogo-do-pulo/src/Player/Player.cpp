@@ -13,18 +13,11 @@ Player::Player(int id, int x, int y){
 Player::~Player(){
 }
 
-void Player::setId(int id){
+void Player::setId(char id){
   this->id = id;
 }
-int Player::getId() const{
+char Player::getId() const{
   return this->id;
-}
-
-void Player::setIsWinner(bool isWinner){
-  this->isWinner = isWinner;
-}
-bool Player::getIsWinner() const{
-  return this->isWinner;
 }
 
 void Player::setX(int x){
@@ -41,48 +34,30 @@ int Player::getY() const{
   return this->position.second;
 }
 
-// void Player::setNodeX(int x){
-//   this->node->position.first = x;
-// }
-// int Player::getNodeX() const{
-//   return this->node->position.first;
-// }
-
-// void Player::setNodeY(int y){
-//   this->node->position.second = y;
-// }
-// int Player::getNodeY() const{
-//   return this->node->position.second;
-// }
-
-// void Player::setNodeValue(int value){
-//   this->node->value = value;
-// }
-// int Player::getNodeValue() const{
-//   return this->node->value;
-// }
-
-void Player::setIsStuck(bool isStuck){
-  this->isStuck = isStuck;
-}
-bool Player::getIsStuck() const{
-  return this->isStuck;
-}
-
 void Player::setLastMoviment(int lastMoviment){
-  this->lastMoviment = lastMoviment;
+  this->lastMoviment.push_back(lastMoviment);
 }
 int Player::getLastMoviment() const{
-  return this->isStuck;
+  if(this->lastMoviment.size()>=1){
+    return this->lastMoviment.at(this->lastMoviment.size()-1);
+  }
+  return 0;
 }
 
 void Player::printPlayer() const{
   std::cout << "Player ID: " << this->id << std::endl;
 	std::cout << "Position<x, y>: <" << this->position.first << ", " << this->position.second << ">" << std::endl;
-	std::cout << "Is winner: " << this->isWinner << std::endl;
 }
 
 void Player::movePlayer(int x, int y){
   this->position.first = x;
   this->position.second = y;
+}
+
+int Player::getNumberOfSteps() const{
+  return this->lastMoviment.size();
+}
+
+int Player::getFirstMoviment() const{
+  return this->lastMoviment.at(0);
 }

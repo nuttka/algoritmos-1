@@ -38,28 +38,28 @@ int main(){
 
 	// Fim entrada.
 
-	std::cout << "-----" << std::endl;
-	std::cout << "Printing ListAdj" << std::endl;
+	// std::cout << "-----" << std::endl;
+	// std::cout << "Printing ListAdj" << std::endl;
 	game->createListAdj();
-	game->printListAdj();
-	std::cout << "-----" << std::endl;
+	// game->printListAdj();
+	// std::cout << "-----" << std::endl;
 
-	std::cout << "-----" << std::endl;
-	std::cout << "Printing BFS" << std::endl;
+	// std::cout << "-----" << std::endl;
+	// std::cout << "Printing BFS" << std::endl;
 	game->bfs();
-	std::cout << "-----" << std::endl;
+	// std::cout << "-----" << std::endl;
 
-	std::cout << "-----" << std::endl;
-	std::cout << "Printing Board" << std::endl;
-	game->printBoard();
-	std::cout << "-----" << std::endl;
+	// std::cout << "-----" << std::endl;
+	// std::cout << "Printing Board" << std::endl;
+	// game->printBoard();
+	// std::cout << "-----" << std::endl;
 
-	std::cout << "-----" << std::endl;
-	std::cout << "Printing Players" << std::endl;
-	for(int i=0; i<amountPlayers; i++){
-		game->getPlayer(i)->printPlayer();
-	}
-	std::cout << "-----" << std::endl;
+	// std::cout << "-----" << std::endl;
+	// std::cout << "Printing Players" << std::endl;
+	// for(int i=0; i<amountPlayers; i++){
+		// game->getPlayer(i)->printPlayer();
+	// }
+	// std::cout << "-----" << std::endl;
 
 	return 0;
 }
