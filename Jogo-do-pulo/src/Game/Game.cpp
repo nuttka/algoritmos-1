@@ -39,6 +39,16 @@ Player* Game::getPlayer(int id) const{
   return this->players.at(id).get();
 }
 
+void Game::printListAdj(){
+  for(auto row=this->list.begin(); row != this->list.end(); ++row){
+		for(auto col=row->begin(); col != row->end(); ++col){
+			std::cout << "<" << col->first << ", " << col->second << "> ";
+		}
+
+		std::cout << std::endl;
+	}
+}
+
 void Game::createListAdj(){
   int k=0;
   for(int x=0; x<this->board->getX(); x++){
@@ -47,6 +57,7 @@ void Game::createListAdj(){
       std::pair<int, int> pos;
       pos.first = x;
       pos.second = y;
+      k = (this->board->getY())*x + (1+y) -1;
 
       if(positionValue == 0){
         break;
@@ -73,21 +84,7 @@ void Game::createListAdj(){
         pos.second = y+positionValue;
         this->list.at(k).push_back(pos);
       }
-      pos.first = x;
-      pos.second = y;
-
-      k = k+1;
 	  }
-	}
-}
-
-void Game::printListAdj(){
-  for(auto row=this->list.begin(); row != this->list.end(); ++row){
-		for(auto col=row->begin(); col != row->end(); ++col){
-			std::cout << "<" << col->first << ", " << col->second << "> ";
-		}
-
-		std::cout << std::endl;
 	}
 }
 
@@ -171,9 +168,9 @@ void Game::bfs(){
       }
     } 
     char ascii = winner + 65;
-    std::cout << std::endl << ascii << std::endl << count << std::endl;
+    std::cout << ascii << std::endl << count << std::endl;
   }else{
-    std::cout << std::endl << "SEM VENCEDORES" << std::endl;
+    std::cout << "SEM VENCEDORES" << std::endl;
   }
 
 }
