@@ -4,11 +4,6 @@ Player::Player(int id, int x, int y){
   this->id = id;
   this->position.first = x;
   this->position.second = y;
-  // this->node->position = this->position;
-  // this->node->down = nullptr;
-  // this->node->right = nullptr;
-  // this->node->left = nullptr;
-  // this->node->up = nullptr;
 }
 Player::~Player(){
 }
@@ -34,30 +29,16 @@ int Player::getY() const{
   return this->position.second;
 }
 
-void Player::setLastMoviment(int lastMoviment){
-  this->lastMoviment.push_back(lastMoviment);
+void Player::setSteps(int steps){
+  this->steps.push_back(steps);
 }
-int Player::getLastMoviment() const{
-  if(this->lastMoviment.size()>=1){
-    return this->lastMoviment.at(this->lastMoviment.size()-1);
+int Player::getLastStep() const{
+  if(this->steps.size()>=1){
+    return this->steps.at(this->steps.size()-1);
   }
   return 0;
 }
 
-void Player::printPlayer() const{
-  std::cout << "Player ID: " << this->id << std::endl;
-	std::cout << "Position<x, y>: <" << this->position.first << ", " << this->position.second << ">" << std::endl;
-}
-
-void Player::movePlayer(int x, int y){
-  this->position.first = x;
-  this->position.second = y;
-}
-
-int Player::getNumberOfSteps() const{
-  return this->lastMoviment.size();
-}
-
 int Player::getFirstMoviment() const{
-  return this->lastMoviment.at(0);
+  return this->steps.at(0);
 }

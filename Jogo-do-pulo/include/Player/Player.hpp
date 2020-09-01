@@ -9,7 +9,7 @@ class Player{
 private:
 	char id;
 	std::pair<int, int> position;
-	std::vector<int> lastMoviment;
+	std::vector<int> steps;
 
 public:
 	Player(int id, int x, int y);
@@ -24,13 +24,10 @@ public:
 	void setY(int y);
 	int getY() const;
   
-	void setLastMoviment(int lastMoviment);
-	int getLastMoviment() const;
+	void setSteps(int steps);
+	int getLastStep() const;
 
 	int getFirstMoviment() const;
-	void printPlayer() const;
-	void movePlayer(int x, int y);
-	int getNumberOfSteps() const;
 };
 
 #endif

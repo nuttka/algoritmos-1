@@ -20,16 +20,11 @@ public:
 
 	void addPlayer(std::unique_ptr<Player> player);
 
-	void printBoard() const;
-	void printPlayers() const;
-
-	Board* getBoard() const;
 	Player* getPlayer(int id) const;
 
 	void createListAdj();
-	void bfs();
-
-	void printListAdj();
+	std::map<int, int> bfs();
+	void defineWinner(std::map<int, int> possiblesWin);
 
 };
 

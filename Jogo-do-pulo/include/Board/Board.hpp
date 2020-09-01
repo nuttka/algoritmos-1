@@ -26,9 +26,6 @@ public:
 
 	void setPositionValue(int x, int y, int value);
 	int getPositionValue(int x, int y) const;
-
-  std::vector<std::vector<int>> getBoard() const;
-	void printBoard() const;
 };
 
 #endif

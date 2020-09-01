@@ -34,15 +34,3 @@ void Board::setPositionValue(int x, int y, int value){
 int Board::getPositionValue(int x, int y) const{
   return this->board.at(x).at(y);
 }
-
-std::vector<std::vector<int>> Board::getBoard() const{
-  return this->board;
-}
-void Board::printBoard() const{
-  for(auto row=this->board.begin(); row!=this->board.end(); row++){
-		for(auto col=row->begin(); col!=row->end(); col++){
-			std::cout << *col << " ";
-		}
-		std::cout << std::endl;
-	}
-}

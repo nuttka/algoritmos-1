@@ -39,7 +39,7 @@ int main(){
 	// Fim entrada.
 
 	game->createListAdj();
-	game->bfs();
+	game->defineWinner(game->bfs());
 
 	return 0;
 }
