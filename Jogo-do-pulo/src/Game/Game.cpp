@@ -170,7 +170,8 @@ void Game::bfs(){
         }
       }
     } 
-    std::cout << std::endl << winner << std::endl << count;
+    char ascii = winner + 65;
+    std::cout << std::endl << ascii << std::endl << count << std::endl;
   }else{
     std::cout << std::endl << "SEM VENCEDORES" << std::endl;
   }
